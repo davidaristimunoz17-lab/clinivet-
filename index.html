@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CliniVet AI - Plataforma de historias clínicas compartidas para clínicas veterinarias potenciada por Inteligencia Artificial Ética y supervisión profesional continua.">
+  <meta name="keywords" content="veterinaria, historia clínica, mascotas, inteligencia artificial, ética médica, cuidados postoperatorios, medicamentos veterinarios">
+  <meta name="author" content="CliniVet AI Systems">
+
+  <title>CliniVet AI | Historias Clínicas Veterinarias & IA Ética</title>
+
+  <!-- Favicon SVG en línea -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230284c7'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-4H7V9h4V5h2v4h4v3h-4v4z'/></svg>">
+
+  <!-- Estilos Clínicos -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Barra Superior de Notificación Médica & Cifrado
+       ======================================================================== -->
+  <aside class="top-medical-bar" aria-label="Estado del Sistema">
+    <div class="status-indicator">
+      <span class="pulsing-dot" aria-hidden="true"></span>
+      <span><strong>Red Clínica VetEthic v2.4 Activa</strong> &bull; Protocolo de Supervisión Humana Obligatoria (HITL)</span>
+    </div>
+    <div class="top-bar-badges">
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        Cifrado Clínico AES-256
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        RGPD / Privacidad Protegida
+      </span>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       Header y Navegación Principal
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#proposito-etico" class="brand-wrapper" aria-label="Ir al inicio de CliniVet AI">
+        <div class="brand-icon-box" aria-hidden="true">
+          <!-- Logo Cruz Médica + Huella -->
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2a2 2 0 0 1 2 2v2.1a6.97 6.97 0 0 1 2.9 1.2l1.5-1.5a2 2 0 1 1 2.8 2.8l-1.5 1.5A6.97 6.97 0 0 1 21 13h2a2 2 0 1 1 0 4h-2.1a6.97 6.97 0 0 1-1.2 2.9l1.5 1.5a2 2 0 1 1-2.8 2.8l-1.5-1.5a6.97 6.97 0 0 1-2.9 1.2V26a2 2 0 1 1-4 0v-2.1a6.97 6.97 0 0 1-2.9-1.2l-1.5 1.5a2 2 0 1 1-2.8-2.8l1.5-1.5A6.97 6.97 0 0 1 3 17H1a2 2 0 1 1 0-4h2.1a6.97 6.97 0 0 1 1.2-2.9L2.8 8.6a2 2 0 1 1 2.8-2.8l1.5 1.5A6.97 6.97 0 0 1 10 6.1V4a2 2 0 0 1 2-2zM9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>CliniVet <span>AI</span></h1>
+          <span class="brand-subtitle">Historias Clínicas Compartidas & IA Responsable</span>
+        </div>
+      </a>
+
+      <nav aria-label="Navegación del sitio">
+        <ul class="nav-links">
+          <li><a href="#proposito-etico" class="nav-link active">Propósito Ético</a></li>
+          <li><a href="#demo-paciente" class="nav-link">Historia de Max (Demo)</a></li>
+          <li><a href="#pilares-ia" class="nav-link">Gobernanza de IA</a></li>
+          <li><a href="#protocolo-urgencias" class="nav-link">Urgencias</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Selector interactivo de Modo Tutor / Modo Veterinario -->
+        <div class="role-switch-container" role="group" aria-label="Cambiar vista de rol">
+          <button id="role-btn-tutor" class="role-btn active" title="Vista simplificada y pedagógica para el tutor de la mascota">
+            🐾 Modo Tutor
+          </button>
+          <button id="role-btn-vet" class="role-btn" title="Vista técnica médica para profesionales veterinarios">
+            🩺 Modo Veterinario
+          </button>
+        </div>
+
+        <a href="#demo-paciente" class="btn-demo-cta">
+          <span>Ver Paciente</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================================================
+         SECCIÓN 1: Contexto Ético y Propósito de la Plataforma ⚖️
+         ======================================================================== -->
+    <section id="proposito-etico" class="hero-ethics-section">
+      <div class="container">
+        <div class="hero-badge-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          Tecnología Veterinaria con Conciencia y Rigor Científico
+        </div>
+
+        <h2 class="hero-title">
+          Historias Clínicas Compartidas con <span class="gradient-text">Inteligencia Artificial Ética</span> y Supervisión Veterinaria Continua.
+        </h2>
+
+        <p class="hero-lead-text">
+          Nuestra plataforma nació con una misión innegociable: <strong>acercar la tecnología más avanzada a los médicos veterinarios y tutores de mascotas bajo un pacto de absoluta transparencia y respeto bioético</strong>. Protegemos la privacidad de cada expediente y reafirmamos un principio fundamental: <em>la IA es una valiosa herramienta de asistencia y educación, pero jamás sustituirá el criterio clínico, la empatía y la toma de decisiones del profesional veterinario</em>.
+        </p>
+
+        <!-- Banner Central de Manifiesto Ético -->
+        <div class="ethics-banner-core">
+          <div class="ethics-banner-icon" aria-hidden="true">
+            ⚖️
+          </div>
+          <div class="ethics-banner-content">
+            <h3>Por qué creamos este software: Nuestro Manifiesto Ético</h3>
+            <p>
+              El vacío de comunicación entre el alta en quirófano y los cuidados en el hogar genera angustia en los tutores y riesgos de complicaciones postoperatorias para las mascotas. Implementamos Inteligencia Artificial especializada para traducir diagnósticos complejos y posologías a instrucciones claras para la familia, garantizando que <strong>ningún dato sensible se utilice sin consentimiento y que toda recomendación cuente con la autoría y validación del médico tratante</strong>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Grilla de Pilares Éticos (Human-in-the-Loop, Transparencia, Privacidad, Aviso Estricto) -->
+        <div id="ethics-pillars-container" class="ethics-pillars-grid">
+          <!-- Renderizado dinámico desde data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECCIÓN 2: Apartado de Muestra (Demo Interactiva de Historia Clínica) 🐾
+         ======================================================================== -->
+    <section id="demo-paciente" class="demo-section">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            Entorno Demostrativo Real
+          </span>
+          <h2 class="section-title">Expediente Clínico Digital Compartido</h2>
+          <p class="section-desc">
+            Visualiza cómo interactúan tutores y médicos veterinarios en tiempo real. Selecciona cualquier procedimiento para consultar la asistencia de IA y sus pautas de cuidado.
+          </p>
+          <div id="current-role-badge" style="display:inline-block; margin-top:8px; font-size:0.875rem; font-weight:700; color:#0369a1; background:#e0f2fe; padding:4px 14px; border-radius:999px;">
+            Modo: Tutor (Lenguaje Claro y Cuidados)
+          </div>
+        </div>
+
+        <!-- FICHA PRINCIPAL DEL PACIENTE: "Max, 12 años, Chihuahua, Macho" -->
+        <article class="patient-card" aria-label="Ficha del Paciente Max">
+          
+          <header class="patient-card-header">
+            <div class="patient-id-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <line x1="6" y1="8" x2="6" y2="8"></line>
+                <line x1="10" y1="8" x2="18" y2="8"></line>
+                <line x1="6" y1="12" x2="18" y2="12"></line>
+                <line x1="6" y1="16" x2="14" y2="16"></line>
+              </svg>
+              <span>EXPEDIENTE: PAC-2024-0891</span>
+            </div>
+
+            <div class="assigned-doctor-info">
+              <div class="doctor-avatar" aria-hidden="true">SV</div>
+              <div>
+                <strong>Médico Asignado:</strong> Dra. Sofía Valenzuela (Col. M.V. 8421)
+              </div>
+            </div>
+          </header>
+
+          <div class="patient-card-body">
+            
+            <!-- Avatar Vectorial Clínico de Max (Chihuahua) -->
+            <div class="patient-avatar-box">
+              <div class="patient-avatar-wrapper" title="Fotografía clínica de Max">
+                <!-- Ilustración Vectorial Estilizada y Cálida de un Chihuahua -->
+                <svg class="patient-avatar-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ilustración médica de Max, Chihuahua">
+                  <!-- Orejas grandes características de Chihuahua -->
+                  <path d="M22 45 C15 20 28 8 36 24 C40 32 38 42 36 46 Z" fill="#D97706" />
+                  <path d="M25 40 C20 24 28 15 33 26 C35 32 34 38 32 41 Z" fill="#FDE68A" />
+                  
+                  <path d="M78 45 C85 20 72 8 64 24 C60 32 62 42 64 46 Z" fill="#D97706" />
+                  <path d="M75 40 C80 24 72 15 67 26 C65 32 66 38 68 41 Z" fill="#FDE68A" />
+
+                  <!-- Cabeza amanzanada de Chihuahua -->
+                  <ellipse cx="50" cy="50" rx="27" ry="25" fill="#F59E0B" />
+                  <ellipse cx="50" cy="56" rx="19" ry="17" fill="#FDE68A" opacity="0.6" />
+
+                  <!-- Ojos grandes y expresivos -->
+                  <circle cx="39" cy="47" r="5" fill="#1E293B" />
+                  <circle cx="37.5" cy="45.5" r="1.6" fill="#FFFFFF" />
+                  <circle cx="61" cy="47" r="5" fill="#1E293B" />
+                  <circle cx="59.5" cy="45.5" r="1.6" fill="#FFFFFF" />
+
+                  <!-- Hocico corto y trufa -->
+                  <ellipse cx="50" cy="57" rx="6" ry="4" fill="#FDE68A" />
+                  <polygon points="50,54 47,58 53,58" fill="#1E293B" />
+                  <path d="M50 58 Q47 62 45 61 M50 58 Q53 62 55 61" stroke="#1E293B" stroke-width="1.2" stroke-linecap="round" />
+
+                  <!-- Collarín / Bandana Clínica Azul con Cruz Blanca -->
+                  <path d="M34 68 Q50 78 66 68 L50 88 Z" fill="#0284C7" />
+                  <!-- Cruz médica en la bandana -->
+                  <rect x="48.5" y="73" width="3" height="8" rx="0.8" fill="#FFFFFF" />
+                  <rect x="46" y="75.5" width="8" height="3" rx="0.8" fill="#FFFFFF" />
+                </svg>
+              </div>
+              <span class="patient-status-chip">
+                <span class="pulsing-dot" style="width:6px; height:6px;"></span>
+                Paciente Activo
+              </span>
+            </div>
+
+            <!-- Ficha Técnica con los datos exactos requeridos -->
+            <div class="patient-main-info">
+              
+              <div class="patient-name-row">
+                <h3 class="patient-name" id="patient-name-display">Max</h3>
+                <span class="patient-specie-badge">Canino Doméstico</span>
+              </div>
+
+              <!-- Requisito: "Max, 12 años, Chihuahua, Macho" -->
+              <div class="patient-core-specs-grid">
+                <div class="spec-item">
+                  <span class="spec-label">Edad del Paciente</span>
+                  <span class="spec-value highlight-patient" id="patient-age-display">12 años (Geriátrico)</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Raza</span>
+                  <span class="spec-value highlight-patient" id="patient-breed-display">Chihuahua</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Sexo</span>
+                  <span class="spec-value highlight-patient" id="patient-sex-display">Macho (Castrado)</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Peso Actual</span>
+                  <span class="spec-value" id="patient-weight-display">3.2 kg</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Microchip ID</span>
+                  <span class="spec-value" id="patient-chip-display">981098102345678</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Tutor Legal</span>
+                  <span class="spec-value" id="patient-tutor-display">Carlos Mendoza</span>
+                </div>
+              </div>
+
+              <!-- Constantes Vitales Clínicas -->
+              <div class="vitals-strip">
+                <div class="vital-pill">
+                  <span class="vital-icon">🌡️</span>
+                  <span>Temperatura: <strong>38.2 °C</strong></span>
+                </div>
+                <div class="vital-pill">
+                  <span class="vital-icon">❤️</span>
+                  <span>FC: <strong>115 lpm</strong></span>
+                </div>
+                <div class="vital-pill">
+                  <span class="vital-icon">🫁</span>
+                  <span>FR: <strong>24 rpm</strong></span>
+                </div>
+                <div class="vital-pill">
+                  <span class="vital-icon">⚖️</span>
+                  <span>Condición Corporal: <strong>5/9 (Ideal)</strong></span>
+                </div>
+              </div>
+
+              <!-- Alerta Clínica Activa -->
+              <div class="patient-clinical-alert">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <div>
+                  <strong>Monitoreo Cardíaco Activo:</strong> Paciente con soplo mitral leve grado II/VI compensado. Protocolo anestésico y farmacológico ajustado a su perfil geriátrico.
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- ====================================================================
+             LÍNEA DE TIEMPO INTERACTIVA DE PROCEDIMIENTOS
+             "17-08-2020: Esterilización"
+             "30-09-2021: Vacunación anual"
+             ==================================================================== -->
+        <section class="timeline-container" aria-label="Historial Médico y Procedimientos">
+          
+          <header class="timeline-header">
+            <div class="timeline-title-group">
+              <h3>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--color-primary-600)">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                Historial de Procedimientos Quirúrgicos y Preventivos
+              </h3>
+              <p>Haz clic en cualquiera de los procedimientos para desplegar el análisis de IA ética con cuidados en casa y medicamentos.</p>
+            </div>
+            
+            <div class="timeline-hint">
+              <span>💡 Haz clic en un procedimiento para consultar con la IA</span>
+            </div>
+          </header>
+
+          <div id="procedures-timeline-list" class="procedures-timeline">
+            <!-- Cargado dinámicamente con JavaScript desde data.js -->
+          </div>
+
+        </section>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECCIÓN 3: Protocolo de Emergencias Veterinarias
+         ======================================================================== -->
+    <section id="protocolo-urgencias" class="emergency-banner-section">
+      <div class="container">
+        <div class="emergency-card-alert">
+          <div class="emergency-text">
+            <h3>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Servicio de Guardia y Urgencias Veterinarias 24 Horas
+            </h3>
+            <p>
+              Si Max presenta signos críticos (dificultad respiratoria, convulsiones, traumatismos o hemorragias activas), <strong>no recurras a la IA</strong>. Trasládalo directamente a nuestra sala de choque y urgencias.
+            </p>
+          </div>
+          <button class="btn-emergency-contact" onclick="alert('📞 Conectando con la Central de Urgencias Veterinarias: +34 900 123 456 (Línea de Vida)')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            Llamar a Urgencias (24h)
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       MODAL DE IA Y ÉTICA (Módulo 3: Cuidados en Casa + Medicamentos + Aviso)
+       ======================================================================== -->
+  <div id="ai-modal-backdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-procedure-title">
+    <div class="modal-dialog">
+      
+      <!-- Cabecera del Modal -->
+      <header class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-ai-badge-icon" aria-hidden="true">
+            🤖
+          </div>
+          <div class="modal-title-group">
+            <h2 id="modal-procedure-title">Esterilización (Orquiectomía Preventiva)</h2>
+            <div class="modal-subtitle">
+              <span id="modal-procedure-date">Fecha: 17-08-2020 | Paciente: Max</span>
+              <span class="ethics-tag">Supervisión Clínica Activa</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Cerrar ventana modal" title="Cerrar">
+          &times;
+        </button>
+      </header>
+
+      <!-- Tabs de Navegación del Modal -->
+      <nav class="modal-tabs" aria-label="Secciones del informe de IA">
+        <button id="tab-btn-care" class="modal-tab-btn active">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          </svg>
+          Cuidados en Casa
+        </button>
+        <button id="tab-btn-meds" class="modal-tab-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+            <path d="M7 12h10"></path>
+            <path d="M12 7v10"></path>
+          </svg>
+          Medicamentos Enviados
+        </button>
+        <button id="tab-btn-faq" class="modal-tab-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          Preguntar a la IA
+        </button>
+      </nav>
+
+      <!-- Contenido Scrolleable del Modal (Renderizado dinámico) -->
+      <div id="modal-dynamic-content" class="modal-body">
+        <!-- Inyectado por js/app.js -->
+      </div>
+
+      <!-- Footer del Modal con Acciones -->
+      <footer class="modal-footer">
+        <div style="font-size:0.8125rem; color:#64748b;">
+          Expediente verificado digitalmente por <strong>Dra. Sofía Valenzuela</strong>
+        </div>
+        <div class="modal-actions-right">
+          <button id="modal-print-btn" class="btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Imprimir Hoja de Cuidados
+          </button>
+          <button class="btn-primary-action" onclick="window.cliniVetApp.closeProcedureModal()">
+            Entendido y Aceptado
+          </button>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Footer Institucional Clínico
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <h4>CliniVet AI &bull; Medicina Veterinaria Ética</h4>
+          <p>
+            Plataforma pionera en historias clínicas interactivas asistidas por inteligencia artificial responsable, garantizando que el amor por los animales vaya acompañado del más alto rigor científico y legal.
+          </p>
+          <div style="margin-top:1.25rem; display:flex; gap:10px;">
+            <span class="ethics-tag" style="background:#1e293b; color:#38bdf8; border-color:#0284c7;">Certificación Bioética 2026</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Gobernanza y Ética</h5>
+          <ul class="footer-links">
+            <li><a href="#proposito-etico">Manifiesto de IA Responsable</a></li>
+            <li><a href="#proposito-etico">Supervisión Médica Humana</a></li>
+            <li><a href="#proposito-etico">Protección de Datos RGPD</a></li>
+            <li><a href="#proposito-etico">Auditoría Algorítmica</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Portal Clínico</h5>
+          <ul class="footer-links">
+            <li><a href="#demo-paciente">Historia de Max (Chihuahua)</a></li>
+            <li><a href="#demo-paciente">Pautas de Esterilización</a></li>
+            <li><a href="#demo-paciente">Calendario Vacunal</a></li>
+            <li><a href="#protocolo-urgencias">Triaje de Emergencias</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Contacto y Soporte</h5>
+          <ul class="footer-links">
+            <li><a href="#">Sede Central Hospitalaria</a></li>
+            <li><a href="#">Teléfono Urgencias 24h</a></li>
+            <li><a href="#">Comité de Ética Médica</a></li>
+            <li><a href="#">Colegio Oficial de Veterinarios</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 CliniVet AI Platform. Todos los derechos reservados.
+        </div>
+        <div style="color:#64748b; font-size:0.775rem;">
+          Toda asistencia provista por algoritmos de IA está sujeta a la revisión y firma previa de un médico veterinario habilitado.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts Clínicos (Carga Directa Compatible con file:// y Servidores Web) -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
